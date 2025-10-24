@@ -1,9 +1,6 @@
-
-
 ## Getting Started
 
-
-##Shop App in Next JS
+#Shop App in Next JS
 First, run the development server:
 
 ```bash
@@ -15,5 +12,4 @@ pnpm dev
 # or
 bun dev
 ```
-
-
+n
