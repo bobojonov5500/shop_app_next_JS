@@ -1,18 +1,11 @@
 import { ProductType } from "app/types/product";
-import Image from "next/image";
-// import Image from "next/image";
+import CustomImage from "./image";
 
 const ProductCard = ({ product }: { product: ProductType }) => {
   return (
     <div className="bg-gray-100 p-6 rounded-lg">
       <div className="relative p-2 m-3 hover:scale-110 transition-transform duration-300 ease-in-out w-full h-60 ">
-        <Image
-          fill
-          className=" rounded-lg object-contain"
-          src={product.image}
-          alt="content"
-          sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-        />
+        <CustomImage product={product} fill />
       </div>
       <div className="flex justify-between items-center mb-3">
         <span className="font-semibold">Price: &#36;{product.price}</span>
