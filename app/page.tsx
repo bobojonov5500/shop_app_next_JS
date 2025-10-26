@@ -2,7 +2,7 @@ import Hero from "./components/hero";
 import ProductCard from "./components/product-card";
 import { ProductType } from "./types/product";
 
-async function FetchData<T>(url: string): Promise<T> {
+export async function FetchData<T>(url: string): Promise<T> {
   const res = await fetch(url);
   return res.json();
 }
