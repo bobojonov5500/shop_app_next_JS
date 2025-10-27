@@ -8,6 +8,7 @@ import CustomImage from "app/components/image";
 import { ClipLoader } from "react-spinners";
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
+import { Bounce, toast } from "react-toastify";
 
 const ProductDetailedPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -15,6 +16,45 @@ const ProductDetailedPage = () => {
   const [product, setProdcut] = useState<ProductType>();
   const [isOpen, setIsOpen] = useState(true);
   const router = useRouter();
+
+  const handleAdd = () => {
+    const storedCart = localStorage.getItem("cart");
+    const cartProducts: ProductType[] = storedCart
+      ? JSON.parse(storedCart)
+      : [];
+
+    if (!product) return;
+
+    const isExistProduct = cartProducts.find((e) => e.id === product?.id);
+
+    let UpdatedData;
+
+    if (isExistProduct) {
+      UpdatedData = cartProducts.map((e) => {
+        if (e.id === product.id) {
+          return { ...e, quantity: e.quantity + 1 };
+        } else {
+          return e;
+        }
+      });
+
+      localStorage.setItem("cart", JSON.stringify(UpdatedData));
+    } else {
+      const data = [...cartProducts, { ...product, quantity: 1 }];
+      localStorage.setItem("cart", JSON.stringify(data));
+    }
+    toast(`Added to cart`, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+    });
+  };
 
   function close() {
     setIsOpen(false);
@@ -47,10 +87,10 @@ const ProductDetailedPage = () => {
         onClose={close}
       >
         <div className="fixed bg-black/30 inset-0 z-10 w-screen overflow-hidden">
-          <div className="flex text-black border h-screen items-center justify-center p-4">
+          <div className="flex text-black mt-20 md:mt-0 border h-screen items-center justify-center p-4">
             <DialogPanel
               transition
-              className="w-fit md:mt-0 rounded-[5px] bg-white  p-6  duration-300 ease-out data-closed:transform-[scale(95%)] data-closed:opacity-0"
+              className="w-fit  md:mt-0 rounded-[5px] bg-white  p-6  duration-300 ease-out data-closed:transform-[scale(95%)] data-closed:opacity-0"
             >
               {isLoading ? (
                 <ClipLoader />
@@ -97,7 +137,10 @@ const ProductDetailedPage = () => {
                       >
                         View item
                       </button>
-                      <button className="inline-flex cursor-pointer justify-center w-[130px] ml-3 items-center gap-2 rounded-md bg-transparent duration-300 ease-in-out hover:bg-green-500 border-2 border-green-500 text-green-500 px-3 py-1.5 text-sm/6 font-semibold hover:text-white shadow-inner shadow-white/10 focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white data-hover:bg-gray-600 data-open:bg-gray-700">
+                      <button
+                        onClick={handleAdd}
+                        className="inline-flex cursor-pointer justify-center w-[130px] ml-3 items-center gap-2 rounded-md bg-transparent duration-300 ease-in-out hover:bg-green-500 border-2 border-green-500 text-green-500 px-3 py-1.5 text-sm/6 font-semibold hover:text-white shadow-inner shadow-white/10 focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white data-hover:bg-gray-600 data-open:bg-gray-700"
+                      >
                         Add to cart
                       </button>
                     </div>

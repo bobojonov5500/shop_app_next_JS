@@ -13,7 +13,7 @@ export default async function Home() {
   );
 
   return (
-    <main className="mt-12 container min-h-screen mx-auto p-5 ">
+    <main className=" container min-h-screen mx-auto p-5 ">
       <Hero />
       <section className="flex flex-col">
         <h1 className="text-5xl text-center font-bold">All Products</h1>

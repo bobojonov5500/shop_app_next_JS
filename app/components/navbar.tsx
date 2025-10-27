@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 const Navbar = () => {
   const router = useRouter();
   return (
-    <header className="text-gray-600  fixed top-0 w-full  z-40 bg-[#6366F1]">
+    <header className="text-gray-600  fixed top-0  w-full  z-40 bg-[#6366F1]">
       <div className="  flex flex-wrap  p-5 mx-auto  container flex-col md:flex-row items-center">
         <Link
           href="/"
@@ -35,6 +35,12 @@ const Navbar = () => {
           </Link>
         </nav>
         <div className="flex gap-x-2">
+          <Link
+            className="inline-flex cursor-pointer  duration-300 ease-in-out   items-center bg-transparent border-gray-200  border-2 text-white hover:text-black  py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
+            href={"/cart"}
+          >
+            Cart
+          </Link>
           {/* <button className="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">
             Button
             <svg
