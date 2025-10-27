@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^2.2.9",
+    "@number-flow/react": "^0.5.10",
     "@smastrom/react-rating": "^1.5.0",
     "axios": "^1.12.2",
     "next": "16.0.0",

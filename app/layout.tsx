@@ -23,7 +23,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={` ${montserrat.className} antialiased`}>
         <Navbar />
-        <main className="mt-[73px]">{children}</main>
+        <main className="mt-[100px] md:mt-[73px]">{children}</main>
         <ToastContainer />
       </body>
     </html>

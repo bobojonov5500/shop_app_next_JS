@@ -126,20 +126,20 @@ const ProductDetailedPage = () => {
 
                     <div className=" flex mt-auto">
                       <button
-                        className="inline-flex cursor-pointer justify-center w-[130px] items-center gap-2 rounded-md bg-gray-700 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white data-hover:bg-gray-600 data-open:bg-gray-700"
+                        className="inline-flex active:scale-110 duration-200 ease-in-out cursor-pointer justify-center w-[130px] items-center gap-2 rounded-md bg-gray-700 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white data-hover:bg-gray-600 data-open:bg-gray-700"
                         onClick={close}
                       >
                         Got it, thanks!
                       </button>
                       <button
                         onClick={() => window.location.reload()}
-                        className="inline-flex cursor-pointer justify-center w-[130px] ml-3 items-center gap-2 rounded-md bg-blue-500 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white data-hover:bg-gray-600 data-open:bg-gray-700"
+                        className="inline-flex active:scale-110 duration-200 ease-in-out cursor-pointer justify-center w-[130px] ml-3 items-center gap-2 rounded-md bg-blue-500 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white data-hover:bg-gray-600 data-open:bg-gray-700"
                       >
                         View item
                       </button>
                       <button
                         onClick={handleAdd}
-                        className="inline-flex cursor-pointer justify-center w-[130px] ml-3 items-center gap-2 rounded-md bg-transparent duration-300 ease-in-out hover:bg-green-500 border-2 border-green-500 text-green-500 px-3 py-1.5 text-sm/6 font-semibold hover:text-white shadow-inner shadow-white/10 focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white data-hover:bg-gray-600 data-open:bg-gray-700"
+                        className="inline-flex active:scale-110  duration-200 ease-in-out cursor-pointer justify-center w-[130px] ml-3 items-center gap-2 rounded-md bg-transparent  hover:bg-green-500 border-2 border-green-500 text-green-500 px-3 py-1.5 text-sm/6 font-semibold hover:text-white shadow-inner shadow-white/10 focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white data-hover:bg-gray-600 data-open:bg-gray-700"
                       >
                         Add to cart
                       </button>
