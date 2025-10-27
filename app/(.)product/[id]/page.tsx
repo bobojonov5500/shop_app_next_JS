@@ -3,12 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { FetchData } from "app/page";
 import { ProductType } from "app/types/product";
-import {
-  Dialog,
-  DialogBackdrop,
-  DialogPanel,
-  DialogTitle,
-} from "@headlessui/react";
+import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import CustomImage from "app/components/image";
 import { ClipLoader } from "react-spinners";
 import { Rating } from "@smastrom/react-rating";
@@ -21,16 +16,11 @@ const ProductDetailedPage = () => {
   const [isOpen, setIsOpen] = useState(true);
   const router = useRouter();
 
-  function open() {
-    setIsOpen(true);
-  }
-
   function close() {
     setIsOpen(false);
     router.back();
   }
 
-  console.log(isLoading);
   useEffect(() => {
     const GetDetailedProduct = async () => {
       setisLoading(true);
@@ -47,6 +37,7 @@ const ProductDetailedPage = () => {
     };
     GetDetailedProduct();
   }, [id]);
+
   return (
     <div className="">
       <Dialog
@@ -55,11 +46,11 @@ const ProductDetailedPage = () => {
         className="relative focus:outline-none"
         onClose={close}
       >
-        <div className="fixed bg-black/30 inset-0 z-10 w-screen overflow-y-auto">
-          <div className="flex text-black border min-h-full items-center justify-center p-4">
+        <div className="fixed bg-black/30 inset-0 z-10 w-screen overflow-hidden">
+          <div className="flex text-black border h-screen items-center justify-center p-4">
             <DialogPanel
               transition
-              className="w-fit mt-30 md:mt-0 rounded-[5px] bg-white  p-6  duration-300 ease-out data-closed:transform-[scale(95%)] data-closed:opacity-0"
+              className="w-fit md:mt-0 rounded-[5px] bg-white  p-6  duration-300 ease-out data-closed:transform-[scale(95%)] data-closed:opacity-0"
             >
               {isLoading ? (
                 <ClipLoader />
@@ -95,15 +86,18 @@ const ProductDetailedPage = () => {
 
                     <div className=" flex mt-auto">
                       <button
-                        className="inline-flex justify-center w-[130px] items-center gap-2 rounded-md bg-gray-700 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white data-hover:bg-gray-600 data-open:bg-gray-700"
+                        className="inline-flex cursor-pointer justify-center w-[130px] items-center gap-2 rounded-md bg-gray-700 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white data-hover:bg-gray-600 data-open:bg-gray-700"
                         onClick={close}
                       >
                         Got it, thanks!
                       </button>
-                      <button className="inline-flex justify-center w-[130px] ml-3 items-center gap-2 rounded-md bg-blue-500 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white data-hover:bg-gray-600 data-open:bg-gray-700">
+                      <button
+                        onClick={() => window.location.reload()}
+                        className="inline-flex cursor-pointer justify-center w-[130px] ml-3 items-center gap-2 rounded-md bg-blue-500 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white data-hover:bg-gray-600 data-open:bg-gray-700"
+                      >
                         View item
                       </button>
-                      <button className="inline-flex justify-center w-[130px] ml-3 items-center gap-2 rounded-md bg-transparent duration-300 ease-in-out hover:bg-green-500 border-2 border-green-500 text-green-500 px-3 py-1.5 text-sm/6 font-semibold hover:text-white shadow-inner shadow-white/10 focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white data-hover:bg-gray-600 data-open:bg-gray-700">
+                      <button className="inline-flex cursor-pointer justify-center w-[130px] ml-3 items-center gap-2 rounded-md bg-transparent duration-300 ease-in-out hover:bg-green-500 border-2 border-green-500 text-green-500 px-3 py-1.5 text-sm/6 font-semibold hover:text-white shadow-inner shadow-white/10 focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white data-hover:bg-gray-600 data-open:bg-gray-700">
                         Add to cart
                       </button>
                     </div>

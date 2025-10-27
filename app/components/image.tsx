@@ -16,7 +16,7 @@ const CustomImage: FC<Props> = ({ product, fill }) => {
       className={`rounded-lg  object-contain duration-700 ease-in-out ${
         isLoading ? "scale-110 blur-2xl grayscale" : ""
       }`}
-      onLoadingComplete={() => setIsLoading(false)}
+      onLoad={() => setIsLoading(false)}
       src={product.image}
       alt="content"
       sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
