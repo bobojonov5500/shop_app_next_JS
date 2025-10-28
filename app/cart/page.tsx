@@ -7,9 +7,16 @@ import { ProductType } from "app/types/product";
 import { useEffect, useMemo, useState } from "react";
 
 const CartPage = () => {
-  const [products, setProducts] = useState<ProductType[]>(
-    JSON.parse(localStorage.getItem("cart") as string) || []
-  );
+  const [products, setProducts] = useState<ProductType[]>([]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedCart = localStorage.getItem("cart");
+      if (storedCart) {
+        setProducts(JSON.parse(storedCart));
+      }
+    }
+  }, []);
 
   //   remove product
   const RemoveProduct = (id: number) => {
