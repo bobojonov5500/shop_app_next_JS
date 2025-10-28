@@ -5,11 +5,11 @@ const Hero = () => {
   return (
     <div>
       <section className="text-gray-600 body-font">
-        <div className="container mx-auto flex px-5 py-20 md:flex-row flex-col items-center">
-          <div className="relative lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0">
+        <div className="container mx-auto flex py-20 px-5 md:flex-row flex-col items-center">
+          <div className="relative  h-[500px] lg:max-w-[720px] lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0">
             <Image
               fill
-              className="object-cover object-center rounded"
+              className="object-cover  object-center rounded"
               alt="hero"
               src="https://dummyimage.com/720x600"
               sizes=""

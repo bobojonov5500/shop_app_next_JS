@@ -1,3 +1,4 @@
+import Cta from "./components/cta";
 import Hero from "./components/hero";
 import ProductCard from "./components/product-card";
 import { ProductType } from "./types/product";
@@ -23,6 +24,7 @@ export default async function Home() {
           ))}
         </div>
       </section>
+      <Cta />
     </main>
   );
 }

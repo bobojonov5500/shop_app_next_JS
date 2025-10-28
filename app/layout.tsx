@@ -3,6 +3,7 @@ import { Montserrat } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/navbar";
 import { ToastContainer } from "react-toastify";
+import Footer from "./components/footer";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -23,8 +24,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={` ${montserrat.className} antialiased`}>
         <Navbar />
-        <main className="mt-[100px] md:mt-[73px]">{children}</main>
+        <main className="mt-44 md:mt-[84px]">{children}</main>
         <ToastContainer />
+        <Footer />
       </body>
     </html>
   );

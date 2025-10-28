@@ -1,30 +1,28 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 const Navbar = () => {
   const router = useRouter();
+
   return (
     <header className="text-gray-600  fixed top-0  w-full  z-40 bg-[#6366F1]">
       <div className="  flex flex-wrap  p-5 mx-auto  container flex-col md:flex-row items-center">
         <Link
           href="/"
-          className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0"
+          className="flex items-center space-x-2 h-11 title-font font-medium text-gray-900 mb-4 md:mb-0"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            className="w-10 h-10 text-indigo-500 p-2 bg-white  rounded-full"
-            viewBox="0 0 24 24"
-          >
-            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-          </svg>
-          <span className="ml-3 text-white text-xl">Tailblocks</span>
+          <div className="relative w-10 h-10">
+            <Image
+              alt="icon"
+              fill
+              className="object-contain "
+              src={"/icons8-shopping-bag-96.png"}
+            />
+          </div>
+          <span className=" text-white text-xl">Random Shop</span>
         </Link>
         <nav className="md:ml-auto  flex flex-wrap text-white items-center text-base justify-center">
           <Link href={"/"} className="mr-5 hover:text-gray-900">

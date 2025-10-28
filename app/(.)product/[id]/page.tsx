@@ -44,7 +44,7 @@ const ProductDetailedPage = () => {
       localStorage.setItem("cart", JSON.stringify(data));
     }
     toast(`Added to cart`, {
-      position: "top-right",
+      position: "bottom-right",
       autoClose: 5000,
       hideProgressBar: false,
       closeOnClick: false,
@@ -79,7 +79,7 @@ const ProductDetailedPage = () => {
   }, [id]);
 
   return (
-    <div className="">
+    <div className="h-screen">
       <Dialog
         open={isOpen}
         as="div"
@@ -87,7 +87,7 @@ const ProductDetailedPage = () => {
         onClose={close}
       >
         <div className="fixed bg-black/30 inset-0 z-10 w-screen overflow-hidden">
-          <div className="flex text-black mt-20 md:mt-0 border h-screen items-center justify-center p-4">
+          <div className="flex text-black mt-20 md:mt-0  h-screen items-center justify-center p-4">
             <DialogPanel
               transition
               className="w-fit  md:mt-0 rounded-[5px] bg-white  p-6  duration-300 ease-out data-closed:transform-[scale(95%)] data-closed:opacity-0"
