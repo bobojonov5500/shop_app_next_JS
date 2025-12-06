@@ -6,6 +6,7 @@ import CustomImage from "app/components/image";
 import { ProductType } from "app/types/product";
 import { useEffect, useMemo, useState } from "react";
 
+
 const CartPage = () => {
   const [products, setProducts] = useState<ProductType[]>([]);
 

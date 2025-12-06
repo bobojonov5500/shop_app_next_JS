@@ -12,7 +12,7 @@ const Hero = () => {
               className="object-cover  object-center rounded"
               alt="hero"
               src="https://dummyimage.com/720x600"
-              sizes=""
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           </div>
           <div className="lg:grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center">
