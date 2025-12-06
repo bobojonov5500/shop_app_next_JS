@@ -3,9 +3,15 @@ import { FetchData } from "app/page";
 import { ProductType } from "app/types/product";
 
 const Feature = async () => {
-  const products = await FetchData<ProductType[]>(
-    "https://fakestoreapi.com/products"
-  );
+  let products: ProductType[] = [];
+  try {
+    products = await FetchData<ProductType[]>(
+      "https://fakestoreapi.com/products"
+    );
+  } catch (error) {
+    console.log("Failed to load products in this page", error);
+    products = [];
+  }
   return (
     <>
       <section className="text-gray-600 body-font">
