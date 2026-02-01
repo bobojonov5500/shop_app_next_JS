@@ -4,14 +4,24 @@ import ProductCard from "./components/product-card";
 import { ProductType } from "./types/product";
 
 export async function FetchData<T>(url: string): Promise<T> {
-  const res = await fetch(url);
+  const res = await fetch(url, {
+    cache: "no-store",
+  });
+  if (!res.ok) {
+    throw new Error(`API error ${res.status}`);
+  }
   return res.json();
 }
 
 export default async function Home() {
-  const products = await FetchData<ProductType[]>(
-    "https://fakestoreapi.com/products"
-  );
+  let products: ProductType[] = [];
+  try {
+    products = await FetchData<ProductType[]>(
+      "https://fakestoreapi.com/products",
+    );
+  } catch (error) {
+    console.error(`data not loaded! ${error}`);
+  }
 
   return (
     <main className=" container min-h-screen mx-auto p-5 ">
