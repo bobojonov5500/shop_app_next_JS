@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import Cta from "./components/cta";
 import Hero from "./components/hero";
 import ProductCard from "./components/product-card";

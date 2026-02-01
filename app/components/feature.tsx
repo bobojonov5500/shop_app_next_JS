@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import ProductCard from "./product-card";
 import { FetchData } from "app/page";
 import { ProductType } from "app/types/product";

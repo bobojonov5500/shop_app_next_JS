@@ -1,5 +1,5 @@
 "use client";
-
+export const dynamic = "force-dynamic";
 import NumberFlow from "@number-flow/react";
 import EmptyCart from "app/components/empty-cart";
 import CustomImage from "app/components/image";
