@@ -8,6 +8,20 @@ type Props = {
   };
 };
 
+export async function generateStaticParams() {
+  try {
+    const res = await fetch("https://fakestoreapi.com/products");
+    const products: ProductType[] = await res.json();
+
+    return products.map((product) => ({
+      id: String(product.id),
+    }));
+  } catch (error) {
+    console.error("Build vaqtida xatolik:", error);
+    return [];
+  }
+}
+
 const ProductDetailedPage1 = async ({ params }: Props) => {
   const { id } = await params;
   const res = await fetch(`https://fakestoreapi.com/products/${id}`);
