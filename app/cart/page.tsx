@@ -17,7 +17,7 @@ const CartPage = () => {
         setProducts(JSON.parse(storedCart));
       }
     }
-  }, []);
+  }, []); 
 
   //   remove product
   const RemoveProduct = (id: number) => {
@@ -69,7 +69,7 @@ const CartPage = () => {
     <>
       {products.length > 0 ? (
         <section className="bg-white py-8 antialiased  md:py-16">
-          <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">
+          <div className="mx-auto max-w-7xl px-4 2xl:px-0">
             <h2 className="text-xl font-semibold text-center mt-20 md:mt-0 sm:text-2xl">
               Shopping Cart
             </h2>
@@ -81,7 +81,7 @@ const CartPage = () => {
                     <div className="rounded-lg  p-4  bg-gray-100  md:p-6">
                       <div className="space-y-4  md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
                         <div className="relative mr-2.5 flex items-center w-full md:w-[150px]  p-2 hover:scale-110 transition-transform duration-300 ease-in-out  h-60">
-                          <CustomImage product={product} fill />
+                          <CustomImage product={product} fill  />
                         </div>
 
                         <label htmlFor="counter-input" className="sr-only">

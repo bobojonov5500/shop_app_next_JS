@@ -1,52 +1,165 @@
-'use client';
-import { useState, useEffect } from 'react';
-import ProductCard from "../components/product-card";
-import { ProductType } from "../types/product";
+import ProductCard from "./product-card";
+import { FetchData } from "app/page";
+import { ProductType } from "app/types/product";
 
-export default function Feature() {
-  const [products, setProducts] = useState<ProductType[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
-      .then(res => res.json())
-      .then(data => {
-        setProducts(data);
-        setLoading(false);
-      })
-      .catch(error => {
-        console.error('Error loading products:', error);
-        setLoading(false);
-      });
-  }, []);
-
+const Feature = async () => {
+  let products: ProductType[] = [];
+  try {
+    products = await FetchData<ProductType[]>(
+      "https://fakestoreapi.com/products"
+    );
+  } catch (error) {
+    console.log("Failed to load products in this page", error);
+    products = [];
+  }
   return (
     <>
       <section className="text-gray-600 body-font">
-        {/* ... your feature section content ... */}
+        <div className="container px-5 py-24 mx-auto">
+          <h1 className="sm:text-3xl text-2xl font-medium title-font text-center text-gray-900 mb-20">
+            Raw Denim Heirloom Man Braid
+            <br className="hidden sm:block" />
+            Selfies Wayfarers
+          </h1>
+          <div className="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4 md:space-y-0 space-y-6">
+            <div className="p-4 md:w-1/3 flex">
+              <div className="w-12 h-12 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4 shrink-0">
+                <svg
+                  fill="none"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  className="w-6 h-6"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                </svg>
+              </div>
+              <div className="grow pl-6">
+                <h2 className="text-gray-900 text-lg title-font font-medium mb-2">
+                  Shooting Stars
+                </h2>
+                <p className="leading-relaxed text-base">
+                  Blue bottle crucifix vinyl post-ironic four dollar toast vegan
+                  taxidermy. Gastropub indxgo juice poutine, ramps microdosing
+                  banh mi pug VHS try-hard ugh iceland kickstarter tumblr
+                  live-edge tilde.
+                </p>
+                <a className="mt-3 text-indigo-500 inline-flex items-center">
+                  Learn More
+                  <svg
+                    fill="none"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    className="w-4 h-4 ml-2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M5 12h14M12 5l7 7-7 7"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <div className="p-4 md:w-1/3 flex">
+              <div className="w-12 h-12 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4 shrink-0">
+                <svg
+                  fill="none"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  className="w-6 h-6"
+                  viewBox="0 0 24 24"
+                >
+                  <circle cx="6" cy="6" r="3"></circle>
+                  <circle cx="6" cy="18" r="3"></circle>
+                  <path d="M20 4L8.12 15.88M14.47 14.48L20 20M8.12 8.12L12 12"></path>
+                </svg>
+              </div>
+              <div className="grow pl-6">
+                <h2 className="text-gray-900 text-lg title-font font-medium mb-2">
+                  The Catalyzer
+                </h2>
+                <p className="leading-relaxed text-base">
+                  Blue bottle crucifix vinyl post-ironic four dollar toast vegan
+                  taxidermy. Gastropub indxgo juice poutine, ramps microdosing
+                  banh mi pug VHS try-hard ugh iceland kickstarter tumblr
+                  live-edge tilde.
+                </p>
+                <a className="mt-3 text-indigo-500 inline-flex items-center">
+                  Learn More
+                  <svg
+                    fill="none"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    className="w-4 h-4 ml-2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M5 12h14M12 5l7 7-7 7"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <div className="p-4 md:w-1/3 flex">
+              <div className="w-12 h-12 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4 shrink-0">
+                <svg
+                  fill="none"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  className="w-6 h-6"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+              </div>
+              <div className="grow pl-6">
+                <h2 className="text-gray-900 text-lg title-font font-medium mb-2">
+                  Neptune
+                </h2>
+                <p className="leading-relaxed text-base">
+                  Blue bottle crucifix vinyl post-ironic four dollar toast vegan
+                  taxidermy. Gastropub indxgo juice poutine, ramps microdosing
+                  banh mi pug VHS try-hard ugh iceland kickstarter tumblr
+                  live-edge tilde.
+                </p>
+                <a className="mt-3 text-indigo-500 inline-flex items-center">
+                  Learn More
+                  <svg
+                    fill="none"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    className="w-4 h-4 ml-2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M5 12h14M12 5l7 7-7 7"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
       <div className="container min-h-screen mx-auto p-5">
         <section className="flex flex-col">
           <h1 className="text-5xl text-center font-bold">All Products</h1>
-          {loading ? (
-            <div className="mt-10 text-center text-gray-500">
-              <p className="text-lg">Loading products...</p>
-            </div>
-          ) : products.length > 0 ? (
-            <div className="mt-5 gap-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {products.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
-          ) : (
-            <div className="mt-10 text-center">
-              <p className="text-gray-500 text-lg">
-                Unable to load products at this time. Please try again later.
-              </p>
-            </div>
-          )}
+          <div className="mt-5 gap-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {products.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
         </section>
       </div>
     </>
   );
-}
+};
+
+export default Feature;

@@ -8,11 +8,12 @@ export type Props = {
   fill?: boolean;
 };
 
-const CustomImage: FC<Props> = ({ product, fill }) => {
+const CustomImage: FC<Props> = ({ product }) => {
   const [isLoading, setIsLoading] = useState(true);
   return (
     <Image
       fill
+      priority
       className={`rounded-lg  object-contain duration-700 ease-in-out ${
         isLoading ? "scale-110 blur-2xl grayscale" : ""
       }`}
