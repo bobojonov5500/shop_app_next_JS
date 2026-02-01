@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { FetchData } from "app/page";
+// REMOVED: import { FetchData } from "app/page"; -> Can't import server function here
 import { ProductType } from "app/types/product";
 import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import CustomImage from "app/components/image";
@@ -11,13 +11,17 @@ import "@smastrom/react-rating/style.css";
 import { Bounce, toast } from "react-toastify";
 
 const ProductDetailedPage = () => {
-  const { id } = useParams<{ id: string }>();
+  const params = useParams();
+  const id = params?.id as string;
+
   const [isLoading, setisLoading] = useState(false);
-  const [product, setProdcut] = useState<ProductType>();
+  const [product, setProduct] = useState<ProductType>();
   const [isOpen, setIsOpen] = useState(true);
   const router = useRouter();
 
   const handleAdd = () => {
+    if (typeof window === "undefined") return;
+
     const storedCart = localStorage.getItem("cart");
     const cartProducts: ProductType[] = storedCart
       ? JSON.parse(storedCart)
@@ -62,15 +66,19 @@ const ProductDetailedPage = () => {
   }
 
   useEffect(() => {
+    if (!id) return;
+
     const GetDetailedProduct = async () => {
       setisLoading(true);
       try {
-        const product = await FetchData<ProductType>(
-          `https://fakestoreapi.com/products/${id}`
-        );
-        setProdcut(product);
+        const res = await fetch(`https://fakestoreapi.com/products/${id}`);
+        if (!res.ok) throw new Error("Failed");
+        const data: ProductType = await res.json();
+
+        setProduct(data);
       } catch (error) {
         console.log(error);
+        toast.error("Failed to load product");
       } finally {
         setisLoading(false);
       }
@@ -79,67 +87,80 @@ const ProductDetailedPage = () => {
   }, [id]);
 
   return (
-    <div className="h-screen">
+    <div>
       <Dialog
         open={isOpen}
         as="div"
-        className="relative focus:outline-none"
+        className="relative z-50 focus:outline-none" // Added z-50
         onClose={close}
       >
-        <div className="fixed bg-black/30 inset-0 z-10 w-screen overflow-hidden">
-          <div className="flex text-black mt-20 md:mt-0  h-screen items-center justify-center p-4">
+        {/* Backdrop */}
+        <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
+
+        <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+          <div className="flex min-h-full items-center justify-center p-4">
             <DialogPanel
               transition
-              className="w-fit  md:mt-0 rounded-[5px] bg-white  p-6  duration-300 ease-out data-closed:transform-[scale(95%)] data-closed:opacity-0"
+              className="w-full max-w-4xl rounded-xl bg-white p-6 duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0"
             >
               {isLoading ? (
-                <ClipLoader />
+                <div className="flex justify-center items-center h-[300px]">
+                  <ClipLoader size={50} />
+                </div>
               ) : (
-                <div className="flex flex-col max-w-[800px] h-[400px] sm:h-[300px] sm:flex-row ">
-                  <div className="relative sm:w-1/2 w-full p-2 m-3 hover:scale-110 transition-transform duration-300 ease-in-out  h-60 ">
-                    {product?.image && <CustomImage product={product} fill />}
+                <div className="flex flex-col sm:flex-row gap-6">
+                  <div className="relative w-full sm:w-1/2 h-[300px] p-2 hover:scale-105 transition-transform duration-300">
+                    {/* Added priority */}
+                    {product?.image && (
+                      <CustomImage product={product} fill  />
+                    )}
                   </div>
 
-                  <div className="flex flex-col sm:w-1/2 w-full justify-between ">
-                    <div className="">
-                      <DialogTitle as="h3" className=" font-semibold text-xl  ">
+                  <div className="flex flex-col w-full sm:w-1/2 justify-between">
+                    <div>
+                      <DialogTitle as="h3" className="font-semibold text-xl">
                         {product?.title}
                       </DialogTitle>
-                      <div className="flex justify-between mt-2">
-                        <span className="font-semibold">
+                      <div className="flex justify-between mt-2 items-center">
+                        <span className="font-semibold text-lg text-green-600">
                           Price: &#36;{product?.price}
                         </span>
-                        <div>
+                        <div className="flex flex-col items-end">
                           <Rating
                             style={{ maxWidth: 100 }}
-                            value={Math.floor(Number(product?.rating.rate))}
+                            value={Math.floor(
+                              Number(product?.rating?.rate || 0),
+                            )}
+                            readOnly // Ensure it's read-only
                           />
-                          <span className="font-semibold">
+                          <span className="text-xs text-gray-500">
                             Rate: {product?.rating?.rate}
                           </span>
                         </div>
                       </div>
-                      <div className="my-3 leading-relaxed text-base line-clamp-3  text-black/50">
+                      <div className="my-3 leading-relaxed text-base line-clamp-4 text-gray-600">
                         {product?.description}
                       </div>
                     </div>
 
-                    <div className=" flex mt-auto">
+                    <div className="flex mt-4 gap-3 flex-wrap sm:flex-nowrap">
                       <button
-                        className="inline-flex active:scale-110 duration-200 ease-in-out cursor-pointer justify-center w-[130px] items-center gap-2 rounded-md bg-gray-700 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white data-hover:bg-gray-600 data-open:bg-gray-700"
+                        className="flex-1 cursor-pointer justify-center items-center rounded-md bg-gray-700 px-3 py-2 text-sm font-semibold text-white hover:bg-gray-600 active:scale-95 transition"
                         onClick={close}
                       >
-                        Got it, thanks!
+                        Back
                       </button>
+
                       <button
                         onClick={() => window.location.reload()}
-                        className="inline-flex active:scale-110 duration-200 ease-in-out cursor-pointer justify-center w-[130px] ml-3 items-center gap-2 rounded-md bg-blue-500 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white data-hover:bg-gray-600 data-open:bg-gray-700"
+                        className="flex-1 cursor-pointer justify-center items-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white hover:bg-blue-500 active:scale-95 transition"
                       >
                         View item
                       </button>
+
                       <button
                         onClick={handleAdd}
-                        className="inline-flex active:scale-110  duration-200 ease-in-out cursor-pointer justify-center w-[130px] ml-3 items-center gap-2 rounded-md bg-transparent  hover:bg-green-500 border-2 border-green-500 text-green-500 px-3 py-1.5 text-sm/6 font-semibold hover:text-white shadow-inner shadow-white/10 focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white data-hover:bg-gray-600 data-open:bg-gray-700"
+                        className="flex-1 cursor-pointer justify-center items-center rounded-md border-2 border-green-500 text-green-600 px-3 py-2 text-sm font-semibold hover:bg-green-500 hover:text-white active:scale-95 transition"
                       >
                         Add to cart
                       </button>

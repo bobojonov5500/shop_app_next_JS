@@ -13,7 +13,7 @@ export async function FetchData<T>(url: string): Promise<T> {
   return res.json();
 }
 
-export default async function Home() {
+export default async function Home() {  
   let products: ProductType[] = [];
   try {
     products = await FetchData<ProductType[]>(
